@@ -10,14 +10,15 @@ import java.util.Set;
 import seedu.address.model.note.Note;
 
 /**
- * A representation of a Country that can be identified by a 2-letter ISO3166 country-code or by its country
- * name. It contains a list of country notes.
+ * A representation of a Country that can be identified by a 2-letter ISO3166 country-code or by its
+ * country name. It contains a list of country notes.
  */
 public class Country {
 
     private final String countryName;
     private final String countryCode;
     private final Set<Note> countryNotes;
+
 
     /**
      * Initializes a Country by its countryCode.

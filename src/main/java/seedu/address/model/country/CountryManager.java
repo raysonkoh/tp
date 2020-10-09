@@ -9,11 +9,14 @@ import java.util.Map;
  */
 public class CountryManager {
 
+    public static final String MESSAGE_CONSTRAINTS = "Country code should be a 2-letter code following the ISO3166 specification";
+
     //TODO: Should include checking for 3-letter Country Code?
     private final Map<String, Country> countryCodeMap;
 
     /**
-     * Initializes a CountryManager with a Map that maps ISO3166 2-letter country codes to countries.
+     * Initializes a CountryManager with a Map that maps ISO3166 2-letter country codes to
+     * countries.
      */
     public CountryManager() {
         countryCodeMap = initCountryCodeMap();

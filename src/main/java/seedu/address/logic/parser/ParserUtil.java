@@ -13,6 +13,8 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.country.Country;
+import seedu.address.model.country.CountryManager;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,10 +23,12 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final CountryManager COUNTRY_MANAGER = new CountryManager();
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
+     * whitespaces will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -36,8 +40,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -51,8 +55,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String phone} into a {@code Phone}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
@@ -66,8 +70,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String address} into an {@code Address}. Leading and trailing whitespaces
+     * will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -81,8 +85,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String email} into an {@code Email}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
@@ -95,9 +99,21 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    public static Country parseCountry(String countryCode) throws ParseException {
+        requireNonNull(countryCode);
+        String trimmedCountryCode = countryCode.trim();
+        Country country = COUNTRY_MANAGER.getCountryFromCode(trimmedCountryCode);
+
+        if (country == null) {
+            throw new ParseException(CountryManager.MESSAGE_CONSTRAINTS);
+        }
+
+        return country;
+    }
+
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String tag} into a {@code Tag}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
