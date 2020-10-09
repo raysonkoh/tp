@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,6 +20,7 @@ public class Client {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Country country;
 
     // Data fields
     private final Address address;
@@ -27,11 +29,12 @@ public class Client {
     /**
      * Every field must be present and not null.
      */
-    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Client(Name name, Phone phone, Email email, Country country, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.country = country;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -46,6 +49,10 @@ public class Client {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Country getCountry() {
+        return country;
     }
 
     public Address getAddress() {
@@ -71,7 +78,8 @@ public class Client {
 
         return otherClient != null
                 && otherClient.getName().equals(getName())
-                && (otherClient.getPhone().equals(getPhone()) || otherClient.getEmail().equals(getEmail()));
+                && (otherClient.getPhone().equals(getPhone()) || otherClient.getEmail().equals(getEmail()))
+                && (otherClient.getCountry().equals(getCountry()));
     }
 
     /**
@@ -92,6 +100,7 @@ public class Client {
         return otherClient.getName().equals(getName())
                 && otherClient.getPhone().equals(getPhone())
                 && otherClient.getEmail().equals(getEmail())
+                && otherClient.getCountry().equals(getCountry())
                 && otherClient.getAddress().equals(getAddress())
                 && otherClient.getTags().equals(getTags());
     }
@@ -99,7 +108,7 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, country, address, tags);
     }
 
     @Override
@@ -110,6 +119,8 @@ public class Client {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
+                .append(" Country: ")
+                .append(getCountry())
                 .append(" Address: ")
                 .append(getAddress())
                 .append(" Tags: ");
