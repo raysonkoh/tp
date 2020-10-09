@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.country.Country;
+import seedu.address.model.note.Note;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -147,5 +149,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredClients.equals(other.filteredClients);
     }
-
 }

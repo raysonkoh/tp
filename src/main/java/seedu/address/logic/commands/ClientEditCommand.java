@@ -24,6 +24,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -97,10 +98,11 @@ public class ClientEditCommand extends Command {
         Name updatedName = editClientDescriptor.getName().orElse(clientToEdit.getName());
         Phone updatedPhone = editClientDescriptor.getPhone().orElse(clientToEdit.getPhone());
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
+        Country updatedCountry = editClientDescriptor.getCountry().orElse(clientToEdit.getCountry());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Client(updatedName, updatedPhone, updatedEmail, updatedCountry, updatedAddress, updatedTags);
     }
 
     @Override
@@ -129,6 +131,7 @@ public class ClientEditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Country country;
         private Address address;
         private Set<Tag> tags;
 
@@ -142,6 +145,7 @@ public class ClientEditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setCountry(toCopy.country);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -175,6 +179,14 @@ public class ClientEditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setCountry(Country country) {
+            this.country = country;
+        }
+
+        public Optional<Country> getCountry() {
+            return Optional.ofNullable(country);
         }
 
         public void setAddress(Address address) {

@@ -90,7 +90,7 @@ public class ClientBuilder {
     }
 
     public Client build() {
-        return new Client(name, phone, email, address, tags);
+        return new Client(name, phone, email, null, address, tags); //TODO: change null to country
     }
 
 }

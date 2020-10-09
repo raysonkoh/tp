@@ -1,13 +1,15 @@
 package seedu.address.model.note;
 
+import static java.util.Objects.requireNonNull;
+
 public class Note {
     // TODO: Add implementation
-//    private final String noteContents;
-//
-//    public Note(String content) {
-//        requireNonNull(content)
-//        noteContents = content;
-//    }
+    private final String noteContents;
+
+    public Note(String content) {
+        requireNonNull(content);
+        noteContents = content;
+    }
 //    @Override
 //    public String toString() {
 //        return noteContents;

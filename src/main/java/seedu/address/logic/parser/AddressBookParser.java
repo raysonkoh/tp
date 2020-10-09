@@ -12,6 +12,7 @@ import seedu.address.logic.commands.ClientDeleteCommand;
 import seedu.address.logic.commands.ClientEditCommand;
 import seedu.address.logic.commands.ClientFindCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CountryNoteCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -55,6 +56,9 @@ public class AddressBookParser {
         case CLIENT_TYPE:
             return parseClientCommands(restOfCommand);
 
+        case COUNTRY_TYPE:
+            return parseCountryCommands(restOfCommand);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -66,6 +70,32 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+    /**
+     * Parses input given that command is of COUNTRY_TYPE (starts with "country")
+     *
+     * @param input user input with "country" stripped
+     * @return command relating to country functions
+     * @throws ParseException if input does not conform to expected format
+     */
+    private Command parseCountryCommands(String input) throws ParseException {
+        final Matcher secondaryMatcher = SECONDARY_COMMAND_FORMAT.matcher(input.trim());
+        if (!secondaryMatcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        String commandWord = secondaryMatcher.group("commandWord");
+        final String arguments = secondaryMatcher.group("arguments");
+
+        commandWord = COUNTRY_TYPE + " " + commandWord;
+        switch (commandWord) {
+        case CountryNoteCommand.COMMAND_WORD:
+            return new CountryNoteCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

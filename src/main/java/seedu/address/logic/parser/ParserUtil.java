@@ -15,6 +15,7 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryManager;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -109,6 +110,12 @@ public class ParserUtil {
         }
 
         return country;
+    }
+
+    public static Note parseNote(String noteString) throws ParseException {
+        requireNonNull(noteString);
+        String trimmedNoteString = noteString.trim();
+        return new Note(trimmedNoteString);
     }
 
     /**

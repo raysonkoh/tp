@@ -7,6 +7,9 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
+import seedu.address.model.country.Country;
+import seedu.address.model.country.CountryManager;
+import seedu.address.model.note.Note;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +18,7 @@ import seedu.address.model.client.UniqueClientList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueClientList clients;
+    private final CountryManager countryManager;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,9 +29,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         clients = new UniqueClientList();
+        countryManager = new CountryManager();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Clients in the {@code toBeCopied}

@@ -103,7 +103,7 @@ class JsonAdaptedClient {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Client(modelName, modelPhone, modelEmail, null, modelAddress, modelTags); // TODO: change null to country
     }
 
 }
