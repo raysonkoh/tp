@@ -1,12 +1,16 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
+import seedu.address.model.country.Country;
+import seedu.address.model.country.CountryManager;
+import seedu.address.model.note.Note;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +19,7 @@ import seedu.address.model.client.UniqueClientList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueClientList clients;
+    private final CountryManager countryManager;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         clients = new UniqueClientList();
+        countryManager = new CountryManager();
     }
 
     public AddressBook() {}
@@ -93,6 +99,31 @@ public class AddressBook implements ReadOnlyAddressBook {
         clients.remove(key);
     }
 
+    /**
+     * Checks whether the given country already has the given countryNote.
+     *
+     * @param country The given country.
+     * @param countryNote The given countryNote.
+     * @return True if the given country has the given countryNote, else false.
+     */
+    public boolean hasCountryNote(Country country, Note countryNote) {
+        requireAllNonNull(country, countryNote);
+
+        return countryManager.hasCountryNote(country, countryNote);
+    }
+
+    /**
+     * Adds the given countryNote to the given country.
+     *
+     * @param country The given country.
+     * @param countryNote The given countryNote.
+     */
+    public void addCountryNote(Country country, Note countryNote) {
+        requireAllNonNull(country, countryNote);
+
+        countryManager.addCountryNote(country, countryNote);
+    }
+
     //// util methods
 
     @Override
@@ -104,6 +135,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Client> getClientList() {
         return clients.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Country> getCountryList() {
+        countryManager.asUnmodifiableObservableList();
     }
 
     @Override

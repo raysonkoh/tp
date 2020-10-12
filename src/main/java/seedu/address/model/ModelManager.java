@@ -28,7 +28,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
-    private final CountryManager countryManager;
     private final WidgetModel widget;
 
     /**
@@ -137,14 +136,14 @@ public class ModelManager implements Model {
     public boolean hasCountryNote(Country country, Note countryNote) {
         requireAllNonNull(country, countryNote);
 
-        return countryManager.hasCountryNote(country, countryNote);
+        return addressBook.hasCountryNote(country, countryNote);
     }
 
     @Override
     public void addCountryNote(Country country, Note countryNote) {
         requireAllNonNull(country, countryNote);
 
-        countryManager.addCountryNote(country, countryNote);
+        addressBook.addCountryNote(country, countryNote);
     }
 
     //=========== Filtered Client List Accessors =============================================================

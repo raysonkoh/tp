@@ -12,6 +12,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.country.Country;
+import seedu.address.model.note.Note;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -22,13 +24,16 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
 
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
+    private final List<JsonAdaptedCountry> countries = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given clients.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients) {
+    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients,
+            @JsonProperty("countries") List<JsonAdaptedCountry> countries) {
         this.clients.addAll(clients);
+        this.countries.addAll(countries);
     }
 
     /**
@@ -38,6 +43,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
+        countries.addAll(source.getCountryList().stream().map(JsonAdaptedCountry::new).collect(Collectors.toList()));
     }
 
     /**
@@ -54,6 +60,14 @@ class JsonSerializableAddressBook {
             }
             addressBook.addClient(client);
         }
+
+        for (JsonAdaptedCountry jsonAdaptedCountry : countries) {
+            Country country = jsonAdaptedCountry.toModelType();
+            for (Note note: country.getCountryNotes()) {
+                addressBook.addCountryNote(country, note);
+            }
+        }
+
         return addressBook;
     }
 

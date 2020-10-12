@@ -30,6 +30,20 @@ public class Country {
         this.countryNotes = new LinkedHashSet<>();
     }
 
+
+    /**
+     * Initializes a Country by its countryCode.
+     *
+     * @param countryCode The ISO3166 2-letter country code of the country to be initialized.
+     * @param countryName The name of the country.
+     * @param countryNotes The country notes that belong to this country.
+     */
+    public Country(String countryCode, String countryName, Set<Note> countryNotes) {
+        this.countryCode = countryCode;
+        this.countryName = countryName;
+        this.countryNotes = countryNotes;
+    }
+
     /**
      * Gets the list of country notes associated with this country.
      *

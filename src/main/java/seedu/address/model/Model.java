@@ -97,8 +97,21 @@ public interface Model {
      */
     void setClient(Client target, Client editedClient);
 
+    /**
+     * Checks whether the given country already has the given countryNote.
+     *
+     * @param country The given country.
+     * @param countryNote The given countryNote.
+     * @return True if the given country has the given countryNote, else false.
+     */
     boolean hasCountryNote(Country country, Note countryNote);
 
+    /**
+     * Adds the given countryNote to the given country.
+     *
+     * @param country The given country.
+     * @param countryNote The given countryNote.
+     */
     void addCountryNote(Country country, Note countryNote);
 
     /**
